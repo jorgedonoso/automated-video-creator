@@ -1,10 +1,11 @@
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
-import { combineVideos, getDuration } from "./util.js";
-import { template1 } from "../template.js";
+import { getDuration } from "./helpers/ffprobeHelpers.js";
+import { sampleTemplate } from "../sample-template.js";
+import { combineVideos } from "./helpers/ffmpegHelpers.js";
 
 async function main() {
-  const project = template1;
+  const project = sampleTemplate;
   const files = await readdir(project.videos_folder);
   const maxLength = Math.max(...project.clips_durations);
 
@@ -24,9 +25,12 @@ async function main() {
   if (videos.length < project.clips_durations.length)
     throw new Error("Not enough videos");
 
+  // Reduce video list to what's needed.
+  const requiredVideos = videos.slice(0, project.clips_durations.length);
+
   // Combine videos.
   await combineVideos(
-    videos.map((video) => join(project.videos_folder, video)),
+    requiredVideos.map((video) => join(project.videos_folder, video)),
     project.clips_durations,
     join(`output`, `output-${Date.now()}.mp4`),
     project.song_file,

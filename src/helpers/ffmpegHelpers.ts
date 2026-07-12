@@ -1,34 +1,5 @@
 import { execa } from "execa";
-
-export async function getDuration(file: string): Promise<number> {
-  const { stdout } = await execa("ffprobe", [
-    "-v",
-    "error",
-    "-show_entries",
-    "format=duration",
-    "-of",
-    "default=noprint_wrappers=1:nokey=1",
-    file,
-  ]);
-
-  return Number(stdout);
-}
-
-async function hasAudio(file: string): Promise<boolean> {
-  const { stdout } = await execa("ffprobe", [
-    "-v",
-    "error",
-    "-select_streams",
-    "a",
-    "-show_entries",
-    "stream=index",
-    "-of",
-    "csv=p=0",
-    file,
-  ]);
-
-  return stdout.trim().length > 0;
-}
+import { getAudioDuration, hasAudio } from "./ffprobeHelpers.js";
 
 export async function combineVideos(
   inputFiles: string[],
@@ -126,18 +97,4 @@ export async function combineVideos(
   await execa("ffmpeg", args, {
     stdio: "inherit",
   });
-}
-
-async function getAudioDuration(file: string): Promise<number> {
-  const { stdout } = await execa("ffprobe", [
-    "-v",
-    "error",
-    "-show_entries",
-    "format=duration",
-    "-of",
-    "default=noprint_wrappers=1:nokey=1",
-    file,
-  ]);
-
-  return Number(stdout);
 }
