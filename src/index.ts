@@ -29,6 +29,7 @@ async function main() {
     videos.map((video) => join(project.videos_folder, video)),
     project.clips_durations,
     join(`output`, `output-${Date.now()}.mp4`),
+    project.song_file,
   );
 }
 
