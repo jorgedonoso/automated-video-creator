@@ -4,7 +4,9 @@ I built this tool to automate part of my video editing workflow. This project is
 
 ## Demo
 
-[This video was generated using the sample template](./docs/demo.mp4).
+This video was generated using the sample template:
+
+[![demo video](https://img.youtube.com/vi/m8qgTnu3zEg/maxresdefault.jpg)](https://youtube.com/shorts/m8qgTnu3zEg)
 
 To create your own videos, define a template like this:
 
