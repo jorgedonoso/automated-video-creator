@@ -1,3 +1,6 @@
+videos/
+output/
+
 # Logs
 logs
 *.log
