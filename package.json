@@ -1,12 +1,11 @@
 {
-  "name": "automatic-video-editor",
+  "name": "automated-video-creator",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "tsx src/index.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "Jorge Donoso",
