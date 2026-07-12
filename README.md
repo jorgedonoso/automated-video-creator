@@ -2,6 +2,30 @@
 
 I built this tool to automate part of my video editing workflow. This project is my first experiment using `ffmpeg` to generate edits programmatically.
 
+## Demo
+
+[This video was generated using the sample template](./docs/demo.mp4).
+
+To create your own videos, define a template like this:
+
+```ts
+export const sampleTemplate: template = {
+  videos_folder: "./videos", // Place your videos here.
+  song_file: "forever-alone.mp3", // Background music for the video.
+  clips_durations: [1, 2.1, 3, 3, 3], // Duration in seconds for each clip.
+};
+```
+
+## Getting Started
+
+Make sure `ffmpeg` and `ffprobe` are installed.
+
+```bash
+npm install
+# Add your video clips to the /videos folder
+npm run start
+```
+
 ## Generated Command
 
 This tool takes preconfigured templates (defining the videos folder, background music, and clip durations) and dynamically generates an `ffmpeg` command like this one:
