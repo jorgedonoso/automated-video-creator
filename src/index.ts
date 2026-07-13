@@ -1,11 +1,11 @@
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { getDuration } from "./helpers/ffprobeHelpers.js";
-import { sampleTemplate } from "../sample-template.js";
 import { combineVideos } from "./helpers/ffmpegHelpers.js";
+import { select } from "@clack/prompts";
+import type { template } from "./types/template.js";
 
-async function main() {
-  const project = sampleTemplate;
+async function main(project: template) {
   const files = await readdir(project.videos_folder);
   const maxLength = Math.max(...project.clips_durations);
 
@@ -37,4 +37,19 @@ async function main() {
   );
 }
 
-main().catch(console.error);
+const templateSelected = await select({
+  message: "Pick a template:",
+  options: [
+    {
+      value: "Timeless",
+      label: "Timeless by Lauren Duski",
+      hint: "Mellow music - 7 clips",
+    },
+  ],
+});
+
+const templateModule = await import(
+  `../templates/${templateSelected.toString()}/template.js`
+);
+
+main(templateModule.config).catch(console.error);
