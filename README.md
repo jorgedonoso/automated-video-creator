@@ -4,9 +4,12 @@ I built this tool to create video edits with code using `ffmpeg` and `ffprobe`.
 
 ## Demo
 
-This video was generated using the sample template:
+Timeless template:
 
-[![demo video](https://img.youtube.com/vi/m8qgTnu3zEg/maxresdefault.jpg)](https://youtube.com/shorts/m8qgTnu3zEg)
+[![Timeless template](https://img.youtube.com/vi/m8qgTnu3zEg/maxresdefault.jpg)](https://youtube.com/shorts/m8qgTnu3zEg)
+
+Zombies template:
+[![Zombies template](https://img.youtube.com/vi/Gl9ohZIQhBc/maxresdefault.jpg)](https://youtube.com/shorts/Gl9ohZIQhBc)
 
 To create your own videos, define a template like this:
 
