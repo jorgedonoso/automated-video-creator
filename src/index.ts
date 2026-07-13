@@ -37,15 +37,22 @@ async function main(project: template) {
   );
 }
 
+const templates = [
+  {
+    value: "Timeless",
+    label: "Timeless — Lauren Duski",
+    hint: "Mellow music - 7 clips",
+  },
+  {
+    value: "Zombies",
+    label: "Zombies Ate My Neighbors — Lame Genie",
+    hint: "Fast paced - 4 clips",
+  },
+];
+
 const templateSelected = await select({
   message: "Pick a template:",
-  options: [
-    {
-      value: "Timeless",
-      label: "Timeless by Lauren Duski",
-      hint: "Mellow music - 7 clips",
-    },
-  ],
+  options: templates,
 });
 
 const templateModule = await import(

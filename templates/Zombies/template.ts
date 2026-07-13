@@ -1,0 +1,8 @@
+import type { template } from "../../src/types/template.js";
+import path from "node:path";
+
+export const config: template = {
+  videos_folder: "./videos",
+  song_file: path.join(process.cwd(), "/templates/Zombies/Zombies.mp3"),
+  clips_durations: [1, 0.8, 0.8, 2.2],
+};
