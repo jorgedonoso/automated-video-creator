@@ -1,62 +1,20 @@
-import { readdir } from "node:fs/promises";
-import { join } from "node:path";
-import { getDuration } from "./helpers/ffprobeHelpers.js";
-import { combineVideos } from "./helpers/ffmpegHelpers.js";
 import { select } from "@clack/prompts";
-import type { template } from "./types/template.js";
+import { loadTemplates, main } from "./helpers/templateLogic.js";
 
-async function main(project: template) {
-  const files = await readdir(project.videos_folder);
-  const maxLength = Math.max(...project.clips_durations);
+// Load options, user selection and start edit.
+async function run() {
+  const availableTemplates = await loadTemplates();
 
-  const videos = files.filter((file) =>
-    /\.(mp4|mov|mkv|avi|webm)$/i.test(file),
-  );
+  const templateSelected = await select({
+    message: "Pick a template:",
+    options: availableTemplates.map((t) => ({
+      value: t,
+      label: t.label,
+      hint: t.hint,
+    })),
+  });
 
-  // Check lenghts of videos.
-  for (const video of videos) {
-    const path = join(project.videos_folder, video);
-    const duration = await getDuration(path);
-
-    if (duration < maxLength) throw new Error("Some video(s) are too short");
-  }
-
-  // Check number of videos.
-  if (videos.length < project.clips_durations.length)
-    throw new Error("Not enough videos");
-
-  // Reduce video list to what's needed.
-  const requiredVideos = videos.slice(0, project.clips_durations.length);
-
-  // Combine videos.
-  await combineVideos(
-    requiredVideos.map((video) => join(project.videos_folder, video)),
-    project.clips_durations,
-    join(`output`, `output-${Date.now()}.mp4`),
-    project.song_file,
-  );
+  await main(templateSelected);
 }
 
-const templates = [
-  {
-    value: "Timeless",
-    label: "Timeless — Lauren Duski",
-    hint: "Mellow music - 7 clips",
-  },
-  {
-    value: "Zombies",
-    label: "Zombies Ate My Neighbors — Lame Genie",
-    hint: "Fast paced - 4 clips",
-  },
-];
-
-const templateSelected = await select({
-  message: "Pick a template:",
-  options: templates,
-});
-
-const templateModule = await import(
-  `../templates/${templateSelected.toString()}/template.js`
-);
-
-main(templateModule.config).catch(console.error);
+run().catch(console.error);

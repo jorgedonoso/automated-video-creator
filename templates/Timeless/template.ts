@@ -9,4 +9,6 @@ export const config: template = {
     "/templates/Timeless/Timeless - Lauren Duski.mp3",
   ),
   clips_durations: [2.07, 1.7, 1.83, 1.73, 1.73, 1.83, 3.28],
+  label: "Timeless — Lauren Duski",
+  hint: "Mellow music - 7 clips",
 };
