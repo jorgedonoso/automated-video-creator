@@ -1,7 +1,7 @@
 import { readdir } from "node:fs/promises";
 import path, { join } from "node:path";
 import { pathToFileURL } from "node:url";
-import type { template } from "../types/template.js";
+import type { Template } from "../types/template.js";
 import { getDuration } from "./ffprobeHelpers.js";
 import { combineVideos } from "./ffmpegHelpers.js";
 
@@ -27,7 +27,7 @@ export async function loadTemplates() {
   return templates;
 }
 
-export async function main(project: template) {
+export async function main(project: Template) {
   const files = await readdir(project.videos_folder);
   const maxLength = Math.max(...project.clips_durations);
 

@@ -1,7 +1,7 @@
-import type { template } from "../../src/types/template.js";
+import type { Template } from "../../src/types/template.js";
 import path from "node:path";
 
-export const config: template = {
+export const config: Template = {
   videos_folder: "./videos",
   // Source: YouTube Audio Library (licensed for use under its terms).
   song_file: path.join(
