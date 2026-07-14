@@ -11,13 +11,15 @@ Timeless template:
 Zombies template:
 [![Zombies template](https://img.youtube.com/vi/Gl9ohZIQhBc/maxresdefault.jpg)](https://youtube.com/shorts/Gl9ohZIQhBc)
 
-To create your own videos, define a template like this:
+To create your own templates, add a folder under `/templates` and create a `template.ts` file with the following structure:
 
 ```ts
 export const config: template = {
   videos_folder: "./videos", // Place your videos here.
   song_file: "forever-alone.mp3", // Background music for the video.
   clips_durations: [1, 2.1, 3, 3, 3], // Duration in seconds for each clip.
+  label: "The best template", // Name shown when selecting a template.
+  hint: "Mellow music - 7 clips", // Additional information for the option.
 };
 ```
 
